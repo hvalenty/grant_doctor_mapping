@@ -2,7 +2,8 @@ import pandas as pd
 
 class NpiData:
 
-    def read_npi() -> pd.DataFrame:
+    def read_npi(path: str) -> pd.DataFrame:
+        """Read in npi file from path, clean and return."""
         path = 'data/npidata_pfile_20240205-20240211.csv'
         df = pd.read_csv(path)
         #print(df)
@@ -27,12 +28,19 @@ class NpiData:
                 'Provider Business Mailing Address City Name': 'city_name',
 
             }
-        df2 = df.rename(columns=mapper)[mapper.values()]
-        print(df2)
+        df = df.rename(columns=mapper)[mapper.values()]
+        return df
 
     if __name__ == '__main__':
         path = 'data/npidata_pfile_20240205-20240211.csv'
         df = pd.read_csv(path)
         read_npi()
         select_columns(df)
+
+    # for each pairing from the datasets are the people the same from
+    # npi and grants datasets
+        
+    #euclidian distance vs angle distance
+        
+    # use class for hard to load and use it a lot
         
