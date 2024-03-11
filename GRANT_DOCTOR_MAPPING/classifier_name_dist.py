@@ -8,7 +8,7 @@ import numpy as np
 import pandas as pd
 import xgboost as xgb
 import sklearn.model_selection
-import distances as dist
+import GRANT_DOCTOR_MAPPING.npi_grants.string_distance_features as dist
 import fasttext
 
 
