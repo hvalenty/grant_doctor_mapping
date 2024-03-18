@@ -9,6 +9,7 @@ class GrantsReader:
         """Returns a cleaned dataframe"""
         df = self._select_columns(self.df)
         df = self._clean(df)
+        # df = df.dropna(subset= [''])
         # Data can have NaNs
         # Different types (reasonable)
         # Different types (unreasonable)
@@ -83,5 +84,7 @@ if __name__ == '__main__':
 
     df = read_grants_year(2022)
     print(df)
+    print(df.columns)
+    print(df.dtypes)
     # gd = GrantsData()
     
