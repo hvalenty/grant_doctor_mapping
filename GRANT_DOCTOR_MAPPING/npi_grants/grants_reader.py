@@ -29,9 +29,9 @@ class GrantsReader:
         """
         mapper = {
             'APPLICATION_ID': 'application_id',
-            'BUDGET_START': 'budget_start',
-            'ACTIVITY': 'grant_type',
-            'TOTAL_COST': 'total_cost',
+            #'BUDGET_START': 'budget_start',
+            #'ACTIVITY': 'grant_type',
+            #'TOTAL_COST': 'total_cost',
             'PI_NAMEs': 'pi_names',
             'PI_IDS': 'pi_ids',
             'ORG_NAME': 'organization',
@@ -53,10 +53,16 @@ class GrantsReader:
         """
         df['pi_names'] = df['pi_names'].str.split(';')
         df = df.explode('pi_names')
-        df['is_contact'] = df['pi_names'].str.lower().str.contains('(contact)')
+        #df['is_contact'] = df['pi_names'].str.lower().str.contains('(contact)')
         df['pi_names'] = df['pi_names'].str.replace('(contact)', '')
         df['both_names'] = df['pi_names'].apply(lambda x: x.split(',')[:2])
         df[['last_name', 'forename']] = pd.DataFrame(df['both_names'].to_list(), index=df.index)
+        #df['last_name'] = str(df['last_name'])
+        df = df.dropna(subset=['application_id','country','both_names','last_name'])
+        df.drop('both_names', axis=1, inplace=True)
+        #df = df.dropna(subset=['country'])
+        #df = df.dropna(subset=['both_names'])
+        #df = df.dropna(subset=['last_name'])
         return df
 
         
@@ -87,4 +93,5 @@ if __name__ == '__main__':
     print(df.columns)
     print(df.dtypes)
     # gd = GrantsData()
+    
     
